@@ -343,3 +343,21 @@
         grid-template-rows: auto auto;
       }
     }
+/* === BGM 버튼 active (라일락 테마) === */
+#play-btn.active {
+    background-color: #d8ccff;
+    border: 1px solid #b7a6ff;
+    color: #4a3f7a;
+}
+
+#pause-btn.active {
+    background-color: #ffd6e8;
+    border: 1px solid #ffb8d2;
+    color: #7a3f4a;
+}
+
+#play-btn.active,
+#pause-btn.active {
+    transform: translateY(1px);
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.15);
+}

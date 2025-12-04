@@ -67,3 +67,22 @@
       nameInput.value = "";
       msgInput.value = "";
     });
+const bgm = document.getElementById("bgm");
+const playBtn = document.getElementById("play-btn");
+const pauseBtn = document.getElementById("pause-btn");
+
+window.addEventListener("load", () => {
+  bgm.play().catch(() => {});
+});
+
+playBtn.addEventListener("click", () => {
+  bgm.play();
+  playBtn.classList.add("active");
+  pauseBtn.classList.remove("active");
+});
+
+pauseBtn.addEventListener("click", () => {
+  bgm.pause();
+  pauseBtn.classList.add("active");
+  playBtn.classList.remove("active");
+});

@@ -9,7 +9,7 @@ function formatToday() {
 document.getElementById("today-date").textContent = formatToday();
 
 
-// ⭐ 탭 전환 코드는 home.html 내부 스크립트에 이미 있으므로 삭제함
+// ⭐ 탭 전환 기능은 home.html 내부 스크립트에 이미 있으므로 script.js에서는 제거함
 
 
 // 방명록 작성 기능
@@ -41,7 +41,7 @@ guestForm.addEventListener("submit", function (e) {
 });
 
 
-// ⭐ BGM 기능 (완전 동작)
+// ⭐ BGM 기능
 const bgm = document.getElementById("bgm");
 const playBtn = document.getElementById("play-btn");
 const pauseBtn = document.getElementById("pause-btn");

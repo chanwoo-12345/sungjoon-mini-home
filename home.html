@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>미니홈피 - Your Cyworld Style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 레트로 느낌 나는 기본 폰트 세팅 -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "돋움", "Dotum", system-ui, -apple-system, BlinkMacSystemFont;
+      background: #f5f0ff;
+      display: flex;
+      justify-content: center;
+      padding: 30px 10px;
+    }
+
+    /* 전체 미니홈피 프레임 */
+    .mini-home {
+      width: 900px;
+      min-height: 600px;
+      background: #ffffff;
+      border: 3px solid #c3b6ff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+      position: relative;
+    }
+
+    /* 상단 바 (제목 / BGM 영역 느낌) */
+    .top-bar {
+      grid-column: 1 / 3;
+      background: linear-gradient(90deg, #fbe5ff, #e0d7ff);
+      border-bottom: 1px solid #c3b6ff;
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .top-title {
+      font-weight: bold;
+      letter-spacing: 0.03em;
+    }
+
+    .top-bgm {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .top-bgm button {
+      border: 1px solid #bba8ff;
+      background: #fff;
+      padding: 2px 6px;
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    /* 왼쪽 사이드 (프로필 + 메뉴) */
+    .left-panel {
+      border-right: 1px solid #e2ddff;
+      background: #faf7ff;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .profile-card {
+      border: 1px solid #d3c7ff;
+      padding: 10px;
+      background: #ffffff;
+    }
+
+    .profile-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border: 1px solid #ccc;
+      background: #f3f3f3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 8px;
+    }
+
+    .profile-name {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .profile-status {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    .profile-info {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    .menu {
+      border: 1px solid #d3c7ff;
+      background: #ffffff;
+      padding: 6px 0;
+      font-size: 12px;
+    }
+
+    .menu-title {
+      font-size: 11px;
+      padding: 4px 10px;
+      color: #777;
+      border-bottom: 1px dashed #e0ddff;
+    }
+
+    .menu-list {
+      list-style: none;
+    }
+
+    .menu-item {
+      padding: 6px 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.15s;
+    }
+
+    .menu-item:hover {
+      background: #f4f0ff;
+    }
+
+    .menu-item.active {
+      background: #e5ddff;
+      font-weight: bold;
+    }
+
+    .menu-item span {
+      font-size: 11px;
+    }
+
+    .menu-item small {
+      font-size: 10px;
+      color: #999;
+    }
+
+    /* 오른쪽 메인 */
+    .right-panel {
+      padding: 12px;
+      display: grid;
+      grid-template-rows: 170px 1fr;
+      gap: 10px;
+    }
+
+    /* 미니룸 영역 */
+    .miniroom {
+      border: 1px solid #d3c7ff;
+      background: #fffdf8;
+      position: relative;
+      padding: 8px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 8px;
+    }
+
+    .miniroom-label {
+      position: absolute;
+      top: -11px;
+      left: 10px;
+      background: #f5f0ff;
+      padding: 0 6px;
+      font-size: 10px;
+      border: 1px solid #d3c7ff;
+      border-bottom: none;
+    }
+
+    .miniroom-scene {
+      border: 1px solid #d3c7ff;
+      background: #f7f4ff;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .miniroom-text {
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    /* 컨텐츠 영역 */
+    .content {
+      border: 1px solid #d3c7ff;
+      background: #ffffff;
+      padding: 10px;
+      font-size: 11px;
+      overflow: auto;
+    }
+
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed #e0ddff;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    .content-title {
+      font-weight: bold;
+    }
+
+    .content-date {
+      font-size: 10px;
+      color: #999;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    .diary-entry {
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dotted #eee;
+    }
+
+    .diary-entry:last-child {
+      border-bottom: none;
+    }
+
+    .diary-entry-title {
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .diary-entry-date {
+      font-size: 10px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .diary-entry-body {
+      white-space: pre-line;
+      line-height: 1.5;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 8px;
+    }
+
+    .photo-item {
+      border: 1px solid #ddd;
+      background: #fafafa;
+      aspect-ratio: 3 / 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #777;
+    }
+
+    .guestbook-form {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .guestbook-form input,
+    .guestbook-form textarea {
+      width: 100%;
+      border: 1px solid #d3c7ff;
+      padding: 4px;
+      font-size: 11px;
+      resize: vertical;
+    }
+
+    .guestbook-form button {
+      align-self: flex-end;
+      padding: 4px 10px;
+      font-size: 11px;
+      border: 1px solid #bba8ff;
+      background: #f5f0ff;
+      cursor: pointer;
+    }
+
+    .guestbook-list {
+      border-top: 1px dashed #eee;
+      padding-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .guestbook-item {
+      border-bottom: 1px dotted #eee;
+      padding-bottom: 6px;
+    }
+
+    .guestbook-meta {
+      font-size: 10px;
+      color: #888;
+      margin-bottom: 2px;
+    }
+
+    .guestbook-text {
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .home-intro {
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    /* 반응형 (모바일일 때 쌓이도록) */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      .mini-home {
+        width: 100%;
+        grid-template-columns: 1fr;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .right-panel {
+        grid-template-rows: auto auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mini-home">
+    <!-- 상단바 -->
+    <div class="top-bar">
+      <div class="top-title">○○님의 미니홈피</div>
+      <div class="top-bgm">
+        <span>BGM: <strong>Old School K-pop 🎵</strong></span>
+        <button type="button">▶ 재생</button>
+        <button type="button">⏸ 정지</button>
+      </div>
+    </div>
+
+    <!-- 왼쪽 패널 -->
+    <aside class="left-panel">
+      <!-- 프로필 카드 -->
+      <section class="profile-card">
+        <div class="profile-photo">
+          프로필 사진
+        </div>
+        <div class="profile-name">○○ (닉네임)</div>
+        <div class="profile-status">오늘도 화이팅 ✨</div>
+        <div class="profile-info">
+          · 나이: 20살<br />
+          · 학교: OO대학교<br />
+          · 한 줄 소개: <br />
+          &nbsp;&nbsp;레트로 감성 좋아해요 :)
+        </div>
+      </section>
+
+      <!-- 메뉴 -->
+      <nav class="menu">
+        <div class="menu-title">MENU</div>
+        <ul class="menu-list">
+          <li class="menu-item active" data-target="home">
+            <span>홈</span>
+            <small>Home</small>
+          </li>
+          <li class="menu-item" data-target="diary">
+            <span>다이어리</span>
+            <small>Diary</small>
+          </li>
+          <li class="menu-item" data-target="photo">
+            <span>사진첩</span>
+            <small>Photo</small>
+          </li>
+          <li class="menu-item" data-target="guestbook">
+            <span>방명록</span>
+            <small>Guestbook</small>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- 오른쪽 패널 -->
+    <main class="right-panel">
+      <!-- 미니룸 -->
+      <section class="miniroom">
+        <div class="miniroom-label">MINIROOM</div>
+        <div class="miniroom-scene">
+          <span>여기에 미니룸 이미지<br>또는 일러스트를 넣으세요</span>
+        </div>
+        <div class="miniroom-text">
+          오늘의 미니룸 한마디 🗨<br />
+          - 날씨가 좋으면 기분도 좋아지는 타입 ☀<br />
+          - 과제와의 전쟁 중...<br />
+          - 방문해줘서 고마워요! <span style="font-size: 10px;">(♡나는 너의 팬♡)</span>
+        </div>
+      </section>
+
+      <!-- 컨텐츠 -->
+      <section class="content">
+        <div class="content-header">
+          <div class="content-title">홈</div>
+          <div class="content-date" id="today-date"></div>
+        </div>
+
+        <!-- 홈 탭 -->
+        <div class="content-section active" id="home">
+          <div class="home-intro">
+            안녕하세요, ○○의 미니홈피에 오신 걸 환영합니다 :)  
+            예전 싸이월드 느낌 그대로,  
+            소소한 일상과 추억들을 모아두는 공간이에요.
+
+            왼쪽 메뉴에서 다이어리, 사진첩, 방명록도 구경해 주세요!
+          </div>
+        </div>
+
+        <!-- 다이어리 탭 -->
+        <div class="content-section" id="diary">
+          <div class="diary-entry">
+            <div class="diary-entry-title">새로운 시작</div>
+            <div class="diary-entry-date">2025.12.04</div>
+            <div class="diary-entry-body">
+오늘 드디어 미니홈피를 만들었다!
+싸이월드 감성 그대로 웹사이트로 만드는 중 :)
+앞으로 여기다가 과제 이야기랑, 일상 기록도 조금씩 남겨봐야지.
+            </div>
+          </div>
+
+          <div class="diary-entry">
+            <div class="diary-entry-title">시험 끝!</div>
+            <div class="diary-entry-date">2025.11.30</div>
+            <div class="diary-entry-body">
+시험이 끝났다.  
+살았다… 😭  
+며칠 동안 제대로 못 자서 힘들었지만, 이제 조금 쉬어도 되겠지?
+친구들이랑 약속도 잡아야겠다!
+            </div>
+          </div>
+        </div>
+
+        <!-- 사진첩 탭 -->
+        <div class="content-section" id="photo">
+          <p style="margin-bottom: 8px;">사진 위에 마우스를 올리면 설명을 넣을 수도 있어요.</p>
+          <div class="photo-grid">
+            <div class="photo-item" title="캠퍼스 풍경">사진 1</div>
+            <div class="photo-item" title="카페에서 공부 중">사진 2</div>
+            <div class="photo-item" title="친구들과 함께">사진 3</div>
+            <div class="photo-item" title="야경">사진 4</div>
+          </div>
+        </div>
+
+        <!-- 방명록 탭 -->
+        <div class="content-section" id="guestbook">
+          <form class="guestbook-form" id="guestbook-form">
+            <input type="text" id="guest-name" placeholder="이름 / 닉네임" required />
+            <textarea id="guest-message" rows="3" placeholder="방명록을 남겨주세요 :)" required></textarea>
+            <button type="submit">작성</button>
+          </form>
+
+          <div class="guestbook-list" id="guestbook-list">
+            <!-- JS로 방명록이 추가됩니다 -->
+            <div class="guestbook-item">
+              <div class="guestbook-meta">익명 · 2025-12-04</div>
+              <div class="guestbook-text">
+                와… 진짜 싸이월드 미니홈피 감성 제대로다 😂 자주 놀러올게!
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // 오늘 날짜 표시
+    function formatToday() {
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return y + "." + m + "." + day;
+    }
+    document.getElementById("today-date").textContent = formatToday();
+
+    // 메뉴 탭 전환
+    const menuItems = document.querySelectorAll(".menu-item");
+    const sections = document.querySelectorAll(".content-section");
+    const contentTitle = document.querySelector(".content-title");
+
+    const titleMap = {
+      home: "홈",
+      diary: "다이어리",
+      photo: "사진첩",
+      guestbook: "방명록"
+    };
+
+    menuItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        // 메뉴 active
+        menuItems.forEach((m) => m.classList.remove("active"));
+        item.classList.add("active");
+
+        const target = item.getAttribute("data-target");
+
+        // 컨텐츠 전환
+        sections.forEach((section) => {
+          section.classList.remove("active");
+          if (section.id === target) {
+            section.classList.add("active");
+          }
+        });
+
+        // 상단 제목 변경
+        contentTitle.textContent = titleMap[target] || "홈";
+      });
+    });
+
+    // 방명록 작성 기능 (임시, 새로고침하면 사라짐)
+    const guestbookForm = document.getElementById("guestbook-form");
+    const guestbookList = document.getElementById("guestbook-list");
+
+    guestbookForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const nameInput = document.getElementById("guest-name");
+      const msgInput = document.getElementById("guest-message");
+
+      const name = nameInput.value.trim() || "익명";
+      const msg = msgInput.value.trim();
+      if (!msg) return;
+
+      const today = formatToday().replace(/\./g, "-");
+
+      const item = document.createElement("div");
+      item.className = "guestbook-item";
+      item.innerHTML = `
+        <div class="guestbook-meta">${name} · ${today}</div>
+        <div class="guestbook-text">${msg.replace(/\n/g, "<br>")}</div>
+      `;
+      guestbookList.prepend(item);
+
+      nameInput.value = "";
+      msgInput.value = "";
+    });
+  </script>
+</body>
+</html>

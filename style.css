@@ -1,0 +1,345 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "돋움", "Dotum", system-ui, -apple-system, BlinkMacSystemFont;
+      background: #f5f0ff;
+      display: flex;
+      justify-content: center;
+      padding: 30px 10px;
+    }
+
+    /* 전체 미니홈피 프레임 */
+    .mini-home {
+      width: 900px;
+      min-height: 600px;
+      background: #ffffff;
+      border: 3px solid #c3b6ff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+      position: relative;
+    }
+
+    /* 상단 바 (제목 / BGM 영역 느낌) */
+    .top-bar {
+      grid-column: 1 / 3;
+      background: linear-gradient(90deg, #fbe5ff, #e0d7ff);
+      border-bottom: 1px solid #c3b6ff;
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .top-title {
+      font-weight: bold;
+      letter-spacing: 0.03em;
+    }
+
+    .top-bgm {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .top-bgm button {
+      border: 1px solid #bba8ff;
+      background: #fff;
+      padding: 2px 6px;
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    /* 왼쪽 사이드 (프로필 + 메뉴) */
+    .left-panel {
+      border-right: 1px solid #e2ddff;
+      background: #faf7ff;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .profile-card {
+      border: 1px solid #d3c7ff;
+      padding: 10px;
+      background: #ffffff;
+    }
+
+    .profile-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border: 1px solid #ccc;
+      background: #f3f3f3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 8px;
+    }
+
+    .profile-name {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .profile-status {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    .profile-info {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    .menu {
+      border: 1px solid #d3c7ff;
+      background: #ffffff;
+      padding: 6px 0;
+      font-size: 12px;
+    }
+
+    .menu-title {
+      font-size: 11px;
+      padding: 4px 10px;
+      color: #777;
+      border-bottom: 1px dashed #e0ddff;
+    }
+
+    .menu-list {
+      list-style: none;
+    }
+
+    .menu-item {
+      padding: 6px 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.15s;
+    }
+
+    .menu-item:hover {
+      background: #f4f0ff;
+    }
+
+    .menu-item.active {
+      background: #e5ddff;
+      font-weight: bold;
+    }
+
+    .menu-item span {
+      font-size: 11px;
+    }
+
+    .menu-item small {
+      font-size: 10px;
+      color: #999;
+    }
+
+    /* 오른쪽 메인 */
+    .right-panel {
+      padding: 12px;
+      display: grid;
+      grid-template-rows: 170px 1fr;
+      gap: 10px;
+    }
+
+    /* 미니룸 영역 */
+    .miniroom {
+      border: 1px solid #d3c7ff;
+      background: #fffdf8;
+      position: relative;
+      padding: 8px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 8px;
+    }
+
+    .miniroom-label {
+      position: absolute;
+      top: -11px;
+      left: 10px;
+      background: #f5f0ff;
+      padding: 0 6px;
+      font-size: 10px;
+      border: 1px solid #d3c7ff;
+      border-bottom: none;
+    }
+
+    .miniroom-scene {
+      border: 1px solid #d3c7ff;
+      background: #f7f4ff;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .miniroom-text {
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    /* 컨텐츠 영역 */
+    .content {
+      border: 1px solid #d3c7ff;
+      background: #ffffff;
+      padding: 10px;
+      font-size: 11px;
+      overflow: auto;
+    }
+
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed #e0ddff;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    .content-title {
+      font-weight: bold;
+    }
+
+    .content-date {
+      font-size: 10px;
+      color: #999;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    .diary-entry {
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dotted #eee;
+    }
+
+    .diary-entry:last-child {
+      border-bottom: none;
+    }
+
+    .diary-entry-title {
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .diary-entry-date {
+      font-size: 10px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .diary-entry-body {
+      white-space: pre-line;
+      line-height: 1.5;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 8px;
+    }
+
+    .photo-item {
+      border: 1px solid #ddd;
+      background: #fafafa;
+      aspect-ratio: 3 / 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #777;
+    }
+
+    .guestbook-form {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .guestbook-form input,
+    .guestbook-form textarea {
+      width: 100%;
+      border: 1px solid #d3c7ff;
+      padding: 4px;
+      font-size: 11px;
+      resize: vertical;
+    }
+
+    .guestbook-form button {
+      align-self: flex-end;
+      padding: 4px 10px;
+      font-size: 11px;
+      border: 1px solid #bba8ff;
+      background: #f5f0ff;
+      cursor: pointer;
+    }
+
+    .guestbook-list {
+      border-top: 1px dashed #eee;
+      padding-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .guestbook-item {
+      border-bottom: 1px dotted #eee;
+      padding-bottom: 6px;
+    }
+
+    .guestbook-meta {
+      font-size: 10px;
+      color: #888;
+      margin-bottom: 2px;
+    }
+
+    .guestbook-text {
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .home-intro {
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    /* 반응형 (모바일일 때 쌓이도록) */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      .mini-home {
+        width: 100%;
+        grid-template-columns: 1fr;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .right-panel {
+        grid-template-rows: auto auto;
+      }
+    }

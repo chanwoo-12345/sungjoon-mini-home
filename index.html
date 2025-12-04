@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>로그인 - 성준이 미니홈피</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .login-container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f0ff;
+    }
+
+    .login-box {
+      width: 320px;
+      border: 3px solid #c3b6ff;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      text-align: center;
+      font-family: "돋움", "Dotum", system-ui;
+    }
+
+    .login-box h2 {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 90%;
+      padding: 6px;
+      margin-bottom: 10px;
+      border: 1px solid #d3c7ff;
+      font-size: 12px;
+    }
+
+    .login-box button {
+      padding: 6px 20px;
+      font-size: 12px;
+      border: 1px solid #bba8ff;
+      background: #f5f0ff;
+      cursor: pointer;
+    }
+
+    .login-error {
+      color: red;
+      font-size: 11px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h2>성준이 미니홈피 로그인</h2>
+      <input type="text" id="username" placeholder="아이디를 입력하세요" />
+      <input type="password" id="password" placeholder="비밀번호를 입력하세요" />
+      <br />
+      <button onclick="login()">로그인</button>
+      <div class="login-error" id="login-error"></div>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const id = document.getElementById('username').value;
+      const pw = document.getElementById('password').value;
+      const errorDiv = document.getElementById('login-error');
+
+      if (id === 'sungjoon' && pw === 'dhvmsthtm') {
+        window.location.href = 'index.html';
+      } else {
+        errorDiv.textContent = '아이디 또는 비밀번호가 올바르지 않습니다.';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -373,14 +373,3 @@
     height: 100%;
     object-fit: cover;
 }
-.write-btn {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    background: #f5c16c;
-    border: 1px solid #dba74d;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-}

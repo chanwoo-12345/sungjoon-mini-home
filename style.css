@@ -376,7 +376,7 @@
 /* 다이어리 작성 버튼 */
 #diary {
     position: relative;
-    padding-bottom: 90px;   /* ★ 버튼 공간 확보 */
+    padding-bottom: 120px;   /* ★ 버튼 공간 확보 */
 }
 
 .write-btn {

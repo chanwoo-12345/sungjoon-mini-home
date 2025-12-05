@@ -382,7 +382,7 @@
 .write-btn {
     position: absolute;
     right: 20px;
-    bottom: 20px;   /* ★ 정상 위치 */
+    bottom: 10px;   /* ★ 정상 위치 */
     
     background: #cdb7ff;
     color: white;

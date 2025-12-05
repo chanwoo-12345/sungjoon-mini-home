@@ -375,15 +375,16 @@
 }
 /* 다이어리 작성 버튼 */
 #diary {
-    position: relative; /* important! 버튼 정렬 기준 */
+    position: relative;
+    padding-bottom: 90px;   /* ★ 버튼 공간 확보 */
 }
 
 .write-btn {
     position: absolute;
     right: 20px;
-    bottom: -10px;
-
-    background: #cdb7ff;      /* 연보라색 */
+    bottom: 20px;   /* ★ 정상 위치 */
+    
+    background: #cdb7ff;
     color: white;
     border: 1px solid #b39ce6;
     padding: 6px 14px;

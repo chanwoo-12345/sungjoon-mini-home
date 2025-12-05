@@ -373,3 +373,28 @@
     height: 100%;
     object-fit: cover;
 }
+/* 다이어리 작성 버튼 */
+#diary {
+    position: relative; /* important! 버튼 정렬 기준 */
+}
+
+.write-btn {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+
+    background: #cdb7ff;      /* 연보라색 */
+    color: white;
+    border: 1px solid #b39ce6;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    transition: 0.2s;
+}
+
+.write-btn:hover {
+    background: #bfa5ff;
+}

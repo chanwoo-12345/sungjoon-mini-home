@@ -372,12 +372,16 @@
       .right-panel {
         grid-template-rows: auto auto;
       }
-    }
-.mini-wrapper {
-    transform: rotate(-1deg)
-    /* ★ mini-home을 반듯하게 만드는 보정 코드 추가 위치 ★ */
+    
+.memo-inner {
+  transform: none !important;
+}
+
 .mini-home {
-    transform: rotate(0deg) !important;
+  transform: none !important;
+}
+.memo-layer {
+  transform: none !important;
 }
   </style>
 </head>
@@ -616,6 +620,7 @@
 
 </body>
 </html>
+
 
 
 

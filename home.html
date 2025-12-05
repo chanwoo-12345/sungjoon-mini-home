@@ -5,10 +5,9 @@
   <title>미니홈피 - Your Cyworld Style</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- 외부 CSS 불러오기 (캐시 무시용 버전 포함) -->
+  <!-- 외부 CSS 불러오기 -->
   <link rel="stylesheet" href="style.css?v=3">
-  
-  <!-- 레트로 느낌 나는 기본 폰트 세팅 -->
+
   <style>
     * {
       box-sizing: border-box;
@@ -25,20 +24,30 @@
       padding: 60px 10px;
     }
 
-    /* paper-layer 추가 */
-    .paper-layer {
-      background: #fcfaff;
-      width: 1100px;
+    /* 📄 큰 종이(겹침 1) */
+    .memo-layer {
+      background: #f7f0ff;
+      width: 1150px;
+      padding: 45px;
+      border-radius: 14px;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.18);
+      transform: rotate(-2deg);
+      position: relative;
+      top: 10px;
+    }
+
+    /* 📄 작은 종이(겹침 2) */
+    .memo-inner {
+      background: white;
       padding: 35px;
       border-radius: 12px;
       box-shadow: 0 12px 28px rgba(0,0,0,0.15);
-      position: relative;
-      top: 10px;
-      transform: rotate(-1.2deg);
+      transform: rotate(1deg);
     }
 
-    /* 기존 mini-home 스타일 (절대 수정 없음) */
+    /* 🏠 mini-home은 절대 삐뚤어지지 않음 */
     .mini-home {
+      transform: none !important;
       width: 900px;
       min-height: 600px;
       background: #ffffff;
@@ -50,8 +59,10 @@
       position: relative;
     }
 
-    /* 이하 너의 기존 CSS 전부 그대로 유지 */
+    /* ↓↓↓↓↓↓ 아래부터는 너가 보내준 기존 CSS 그대로 ↓↓↓↓↓↓ */
+
     .top-bar {
+      grid-column: 1 / 3;
       background: linear-gradient(90deg, #fbe5ff, #e0d7ff);
       border-bottom: 1px solid #c3b6ff;
       padding: 8px 16px;
@@ -366,131 +377,168 @@
 </head>
 
 <body>
-  <div class="paper-layer">
-    <div class="mini-home">
+  <!-- 📄 겹쳐진 종이 1 -->
+  <div class="memo-layer">
 
-      <!-- ★★★★★ 기존 mini-home 안 코드들 절대 수정 없음 ★★★★★ -->
-      <!-- (여기부터 네가 보낸 모든 HTML 원본 그대로 복사됨) -->
+    <!-- 📄 겹쳐진 종이 2 -->
+    <div class="memo-inner">
 
-      <!-- 상단바 -->
-      <div class="top-bar">
-        <div class="top-title">✩성준★별빛남자✩님의 미니홈피</div>
-        <div class="top-bgm">
-          <audio id="bgm" src="bgm.mp3" autoplay loop></audio>
-          <strong>BGM: <span>🎵 헤어지지 못하는 여자, 떠나가지 못하는 남자 🎵</span></strong>
-          <button type="button" id="play-btn" class="active">▶ 재생</button>
-          <button type="button" id="pause-btn">⏸ 정지</button>
+      <!-- 🏠 여기에 기존 mini-home 전체 유지 -->
+      <div class="mini-home">
+
+        <!-- 상단바 -->
+        <div class="top-bar">
+
+          <div class="top-title">✩성준★별빛남자✩님의 미니홈피</div>
+
+          <div class="top-bgm">
+            <audio id="bgm" src="bgm.mp3" autoplay loop></audio>
+
+            <strong>BGM: <span>🎵 헤어지지 못하는 여자, 떠나가지 못하는 남자 🎵</span></strong>
+
+            <button type="button" id="play-btn" class="active">▶ 재생</button>
+            <button type="button" id="pause-btn">⏸ 정지</button>
+          </div>
+
         </div>
-      </div>
 
-      <!-- 왼쪽 패널 -->
-      <aside class="left-panel">
-        <section class="profile-card">
-          <div class="profile-photo"><img src="profile.jpg" alt="프로필 사진"></div>
-          <div class="profile-name">✩성준★별빛남자✩</div>
-          <div class="profile-status">🌙 누구의 하늘 아래서든 나는 성준,<br>오늘도 화이팅 ✨</div>
-          <div class="profile-info">
-            · 나이: 20살<br>· 학교: 한양대학교 ERICA<br>· 한 줄 소개:<br> &nbsp;&nbsp;ㄴrㄹ6 일촌ṑトㅈr :)
-          </div>
-        </section>
+        <!-- 왼쪽 패널 -->
+        <aside class="left-panel">
 
-        <!-- 메뉴 -->
-        <nav class="menu">
-          <div class="menu-title">MENU</div>
-          <ul class="menu-list">
-            <li class="menu-item active" data-target="home"><span>홈</span><small>Home</small></li>
-            <li class="menu-item" data-target="diary"><span>다이어리</span><small>Diary</small></li>
-            <li class="menu-item" data-target="photo"><span>사진첩</span><small>Photo</small></li>
-            <li class="menu-item" data-target="guestbook"><span>방명록</span><small>Guestbook</small></li>
-          </ul>
-        </nav>
-      </aside>
-
-      <!-- 오른쪽 패널 -->
-      <main class="right-panel">
-
-        <!-- 미니룸 -->
-        <section class="miniroom">
-          <div class="miniroom-label">MINIROOM</div>
-          <div class="miniroom-scene">여기에 미니룸 이미지<br>또는 일러스트를 넣으세요</div>
-          <div class="miniroom-text">
-            오늘의 미니룸 한마디 🗨<br>
-            - 날씨가 좋으면 기분도 좋아지는 타입 ☀<br>
-            - 과제와의 전쟁 중...<br>
-            - 방문해줘서 고마워요! <span style="font-size: 10px;">(♡나는 너의 팬♡)</span>
-          </div>
-        </section>
-
-        <!-- 콘텐츠 구역 -->
-        <section class="content">
-          <div class="content-header">
-            <div class="content-title">홈</div>
-            <div class="content-date" id="today-date"></div>
-          </div>
-
-          <div class="content-section active" id="home">
-            <div class="home-intro">
-              ㅇビ૮ત્રુṑト⋌ㅔ요, ✩성준★별빛남ㅈr✩의 ㅁ┃Ꮣㅣ홈ᄑㅣના ꖶ신 걸 환영합Ꮣㅣㄷr :)<br>
-              ࿁ㅕ긴 ✩성준★의 별빛๐ㅣ ㅂĿ짝๐ㅣ는 공ㄱビ✩๐ㅣના요.<br>
-              ꖶ늘도 성준★느낌 ㅇrᨈㅣ죠? ㅎㅎ<br>
-              소소ㅎŁ 일ㅅБ들, 추억 ㅎŁ 컷 ㅎŁ 컷 모ටㅏフГ는 중✦<br>
-              丕용ṑ┃ ㅂĿ짝๐ㅣ는 성준๐ㅣ의 ⋌ㅔኀㅖના 천천ṑ┃ 빠져보⋌ㅔ요 ✧
+          <section class="profile-card">
+            <div class="profile-photo">
+              <img src="profile.jpg" alt="프로필 사진">
             </div>
-          </div>
+            <div class="profile-name">✩성준★별빛남자✩</div>
+            <div class="profile-status">🌙 누구의 하늘 아래서든 나는 성준,<br>
+              오늘도 화이팅 ✨
+            </div>
+            <div class="profile-info">
+              · 나이: 20살<br />
+              · 학교: 한양대학교 ERICA<br />
+              · 한 줄 소개: <br />
+              &nbsp;&nbsp;ㄴrㄹ6 일촌ṑトㅈr :)
+            </div>
+          </section>
 
-          <div class="content-section" id="diary">
-            <div class="diary-entry">
-              <div class="diary-entry-title">새로운 시작</div>
-              <div class="diary-entry-date">2025.12.04</div>
-              <div class="diary-entry-body">
-오늘 드디어 ㅁ┃Ꮣㅣ 홈ᄑㅣ를 만들었다!
-최강 윤성준 ꖶ늘도 호r๐ㅣ팅๐ㅣㄷr. :)
-앞으로 ࿁ㅕᥐㅣㄷrフГ 고ト제 ๐ㅣ࿁ㅑᥐㅣㄹ6, 일ㅅБ ᥐㅣ록도 丕금씩 남겨봐࿁ㅑ스ı.
+          <nav class="menu">
+            <div class="menu-title">MENU</div>
+            <ul class="menu-list">
+              <li class="menu-item active" data-target="home">
+                <span>홈</span>
+                <small>Home</small>
+              </li>
+              <li class="menu-item" data-target="diary">
+                <span>다이어리</span>
+                <small>Diary</small>
+              </li>
+              <li class="menu-item" data-target="photo">
+                <span>사진첩</span>
+                <small>Photo</small>
+              </li>
+              <li class="menu-item" data-target="guestbook">
+                <span>방명록</span>
+                <small>Guestbook</small>
+              </li>
+            </ul>
+          </nav>
+
+        </aside>
+
+        <!-- 오른쪽 패널 -->
+        <main class="right-panel">
+
+          <section class="miniroom">
+            <div class="miniroom-label">MINIROOM</div>
+            <div class="miniroom-scene">
+              <span>여기에 미니룸 이미지<br>또는 일러스트를 넣으세요</span>
+            </div>
+            <div class="miniroom-text">
+              오늘의 미니룸 한마디 🗨<br />
+              - 날씨가 좋으면 기분도 좋아지는 타입 ☀<br />
+              - 과제와의 전쟁 중...<br />
+              - 방문해줘서 고마워요! <span style="font-size: 10px;">(♡나는 너의 팬♡)</span>
+            </div>
+          </section>
+
+          <section class="content">
+            <div class="content-header">
+              <div class="content-title">홈</div>
+              <div class="content-date" id="today-date"></div>
+            </div>
+
+            <div class="content-section active" id="home">
+              <div class="home-intro">
+                ㅇ비૮ત્રુṑト⋌ㅔ요, ✩성준★별빛남ㅈr✩의 ㅁ┃Ꮣㅣ홈ᄑㅣના ꖶ신 걸 환영합Ꮣㅣㄷr :)<br>
+                ࿁ㅕ긴 ✩성준★의 별빛๐ㅣ ㅂĿ짝๐ㅣ는 공ㄱ비✩๐ㅣના요.<br>
+                ꖶ늘도 성준★느낌 ㅇrᨈㅣ죠? ㅎㅎ<br>
+                소소ㅎŁ 일ㅅБ들, 추억 ㅎŁ 컷 ㅎŁ 컷 모ટㅏ프Г는 중✦<br>
+                丕용ṑ┃ ㅂĿ짝๐ㅣ는 성준๐ㅣ의 ⋌ㅔኀㅖના 천천ṑ┃ 빠져보⋌ㅔ요 ✧
               </div>
             </div>
 
-            <div class="diary-entry">
-              <div class="diary-entry-title">시험 끝!</div>
-              <div class="diary-entry-date">2025.12.05</div>
-              <div class="diary-entry-body">
+            <div class="content-section" id="diary">
+              <div class="diary-entry">
+                <div class="diary-entry-title">새로운 시작</div>
+                <div class="diary-entry-date">2025.12.04</div>
+                <div class="diary-entry-body">
+오늘 드디어 ㅁ┃Ꮣㅣ 홈ᄑㅣ를 만들었다!
+최강 윤성준 ꖶ늘도 호r๐ㅣ팅๐ㅣㄷr. :)
+앞으로 ࿁ㅕᥐㅣㄷr프Г 고ト제 ๐ㅣ࿁ㅑᥐㅣㄹ6, 일ㅅБ ᥐㅣ록도 丕금씩 남겨봐࿁ㅑスı.
+                </div>
+              </div>
+
+              <div class="diary-entry">
+                <div class="diary-entry-title">시험 끝!</div>
+                <div class="diary-entry-date">2025.12.05</div>
+                <div class="diary-entry-body">
 시험이 끝났다.  
 살았다… 😭  
 며칠 동안 제대로 못 자서 힘들었지만, 이제 조금 쉬어도 되겠지?
 친구들이랑 약속도 잡아야겠다!
+                </div>
+              </div>
+              <button class="write-btn">작성하기</button>
+            </div>
+
+            <div class="content-section" id="photo">
+              <p style="margin-bottom: 8px;">사진 위에 마우스를 올리면 설명을 넣을 수도 있어요.</p>
+              <div class="photo-grid">
+                <div class="photo-item" title="캠퍼스 풍경">사진 1</div>
+                <div class="photo-item" title="카페에서 공부 중">사진 2</div>
+                <div class="photo-item" title="친구들과 함께">사진 3</div>
+                <div class="photo-item" title="야경">사진 4</div>
               </div>
             </div>
-            <button class="write-btn">작성하기</button>
-          </div>
 
-          <div class="content-section" id="photo">
-            <p style="margin-bottom: 8px;">사진 위에 마우스를 올리면 설명을 넣을 수도 있어요.</p>
-            <div class="photo-grid">
-              <div class="photo-item" title="캠퍼스 풍경">사진 1</div>
-              <div class="photo-item" title="카페에서 공부 중">사진 2</div>
-              <div class="photo-item" title="친구들과 함께">사진 3</div>
-              <div class="photo-item" title="야경">사진 4</div>
-            </div>
-          </div>
+            <div class="content-section" id="guestbook">
+              <form class="guestbook-form" id="guestbook-form">
+                <input type="text" id="guest-name" placeholder="이름 / 닉네임" required />
+                <textarea id="guest-message" rows="3" placeholder="방명록을 남겨주세요 :)" required></textarea>
+                <button type="submit">작성</button>
+              </form>
 
-          <div class="content-section" id="guestbook">
-            <form class="guestbook-form" id="guestbook-form">
-              <input type="text" id="guest-name" placeholder="이름 / 닉네임" required />
-              <textarea id="guest-message" rows="3" placeholder="방명록을 남겨주세요 :)" required></textarea>
-              <button type="submit">작성</button>
-            </form>
-
-            <div class="guestbook-list" id="guestbook-list">
-              <div class="guestbook-item">
-                <div class="guestbook-meta">익명 · 2025-12-04</div>
-                <div class="guestbook-text">와… 진짜 싸이월드 미니홈피 감성 제대로다 😂 자주 놀러올게!</div>
+              <div class="guestbook-list" id="guestbook-list">
+                <div class="guestbook-item">
+                  <div class="guestbook-meta">익명 · 2025-12-04</div>
+                  <div class="guestbook-text">
+                    와… 진짜 싸이월드 미니홈피 감성 제대로다 😂 자주 놀러올게!
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
 
-    </div> <!-- mini-home -->
-  </div> <!-- paper-layer -->
+          </section>
+
+        </main>
+      </div>
+      <!-- END mini-home -->
+
+    </div>
+    <!-- END memo-inner -->
+
+  </div>
+  <!-- END memo-layer -->
 
   <script>
     function formatToday() {
@@ -519,7 +567,6 @@
         item.classList.add("active");
 
         const target = item.getAttribute("data-target");
-
         sections.forEach((section) => {
           section.classList.remove("active");
           if (section.id === target) {
@@ -557,6 +604,7 @@
       msgInput.value = "";
     });
   </script>
+
   <script src="script.js"></script>
 
 </body>

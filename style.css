@@ -381,7 +381,7 @@
 .write-btn {
     position: absolute;
     right: 20px;
-    bottom: 20px;
+    bottom: 12px;
 
     background: #cdb7ff;      /* 연보라색 */
     color: white;

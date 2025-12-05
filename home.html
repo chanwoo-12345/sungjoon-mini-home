@@ -5,551 +5,184 @@
   <title>미니홈피 - Your Cyworld Style</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- 외부 CSS 불러오기 -->
   <link rel="stylesheet" href="style.css?v=3">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    /* 기존 CSS 유지 + 회전 보정 전용 코드 */
 
-    body {
-      font-family: "돋움", "Dotum", system-ui, -apple-system, BlinkMacSystemFont;
-      background: #f9f4ff url("bg-paper-grid.png") repeat;
-      background-size: 300px 300px;
-      display: flex;
-      justify-content: center;
-      padding: 60px 10px;
-    }
-
-    /* 📄 큰 종이(겹침 1) */
+    /* 바깥 종이는 기울어짐 유지 */
     .memo-layer {
-      background: #f7f0ff;
-      width: 1150px;
-      padding: 45px;
-      border-radius: 14px;
-      box-shadow: 0 16px 32px rgba(0,0,0,0.18);
       transform: rotate(-2deg);
-      position: relative;
-      top: 10px;
     }
-
-    /* 📄 작은 종이(겹침 2) */
     .memo-inner {
-      background: white;
-      padding: 35px;
-      border-radius: 12px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
       transform: rotate(1deg);
     }
 
-    /* 🏠 mini-home은 절대 삐뚤어지지 않음 */
+    /* mini-home은 절대 기울어지지 않게 새 wrapper로 보정 */
+    .mini-wrapper {
+      transform: rotate(-1deg); /* memo-inner가 1deg 기울려 있으므로 반대로 보정 */
+    }
+
     .mini-home {
       transform: none !important;
-      width: 900px;
-      min-height: 600px;
-      background: #ffffff;
-      border: 3px solid #c3b6ff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 0;
-      position: relative;
     }
-
-    /* ↓↓↓↓↓↓ 아래부터는 너가 보내준 기존 CSS 그대로 ↓↓↓↓↓↓ */
-
-    .top-bar {
-      grid-column: 1 / 3;
-      background: linear-gradient(90deg, #fbe5ff, #e0d7ff);
-      border-bottom: 1px solid #c3b6ff;
-      padding: 8px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-    }
-
-    .top-title {
-      font-weight: bold;
-      letter-spacing: 0.03em;
-    }
-
-    .top-bgm {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-    }
-
-    .top-bgm button {
-      border: 1px solid #bba8ff;
-      background: #fff;
-      padding: 2px 6px;
-      font-size: 10px;
-      cursor: pointer;
-    }
-
-    .left-panel {
-      border-right: 1px solid #e2ddff;
-      background: #faf7ff;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .profile-card {
-      border: 1px solid #d3c7ff;
-      padding: 10px;
-      background: #ffffff;
-    }
-
-    .profile-photo {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      border: 1px solid #ccc;
-      background: #f3f3f3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: #777;
-      margin-bottom: 8px;
-    }
-
-    .profile-name {
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-
-    .profile-status {
-      font-size: 11px;
-      color: #666;
-      margin-bottom: 6px;
-    }
-
-    .profile-info {
-      font-size: 11px;
-      line-height: 1.5;
-      color: #444;
-    }
-
-    .menu {
-      border: 1px solid #d3c7ff;
-      background: #ffffff;
-      padding: 6px 0;
-      font-size: 12px;
-    }
-
-    .menu-title {
-      font-size: 11px;
-      padding: 4px 10px;
-      color: #777;
-      border-bottom: 1px dashed #e0ddff;
-    }
-
-    .menu-list {
-      list-style: none;
-    }
-
-    .menu-item {
-      padding: 6px 10px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.15s;
-    }
-
-    .menu-item:hover {
-      background: #f4f0ff;
-    }
-
-    .menu-item.active {
-      background: #e5ddff;
-      font-weight: bold;
-    }
-
-    .menu-item span {
-      font-size: 11px;
-    }
-
-    .menu-item small {
-      font-size: 10px;
-      color: #999;
-    }
-
-    .right-panel {
-      padding: 12px;
-      display: grid;
-      grid-template-rows: 170px 1fr;
-      gap: 10px;
-    }
-
-    .miniroom {
-      border: 1px solid #d3c7ff;
-      background: #fffdf8;
-      position: relative;
-      padding: 8px;
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 8px;
-    }
-
-    .miniroom-label {
-      position: absolute;
-      top: -11px;
-      left: 10px;
-      background: #f5f0ff;
-      padding: 0 6px;
-      font-size: 10px;
-      border: 1px solid #d3c7ff;
-      border-bottom: none;
-    }
-
-    .miniroom-scene {
-      border: 1px solid #d3c7ff;
-      background: #f7f4ff;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .miniroom-text {
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-    .content {
-      border: 1px solid #d3c7ff;
-      background: #ffffff;
-      padding: 10px;
-      font-size: 11px;
-      overflow: auto;
-    }
-
-    .content-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px dashed #e0ddff;
-      padding-bottom: 4px;
-      margin-bottom: 8px;
-    }
-
-    .content-title {
-      font-weight: bold;
-    }
-
-    .content-date {
-      font-size: 10px;
-      color: #999;
-    }
-
-    .content-section {
-      display: none;
-    }
-
-    .content-section.active {
-      display: block;
-    }
-
-    .diary-entry {
-      margin-bottom: 10px;
-      padding-bottom: 8px;
-      border-bottom: 1px dotted #eee;
-    }
-
-    .diary-entry:last-child {
-      border-bottom: none;
-    }
-
-    .diary-entry-title {
-      font-weight: bold;
-      margin-bottom: 2px;
-    }
-
-    .diary-entry-date {
-      font-size: 10px;
-      color: #999;
-      margin-bottom: 4px;
-    }
-
-    .diary-entry-body {
-      white-space: pre-line;
-      line-height: 1.5;
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-      gap: 8px;
-    }
-
-    .photo-item {
-      border: 1px solid #ddd;
-      background: #fafafa;
-      aspect-ratio: 3 / 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      color: #777;
-    }
-
-    .guestbook-form {
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .guestbook-form input,
-    .guestbook-form textarea {
-      width: 100%;
-      border: 1px solid #d3c7ff;
-      padding: 4px;
-      font-size: 11px;
-      resize: vertical;
-    }
-
-    .guestbook-form button {
-      align-self: flex-end;
-      padding: 4px 10px;
-      font-size: 11px;
-      border: 1px solid #bba8ff;
-      background: #f5f0ff;
-      cursor: pointer;
-    }
-
-    .guestbook-list {
-      border-top: 1px dashed #eee;
-      padding-top: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .guestbook-item {
-      border-bottom: 1px dotted #eee;
-      padding-bottom: 6px;
-    }
-
-    .guestbook-meta {
-      font-size: 10px;
-      color: #888;
-      margin-bottom: 2px;
-    }
-
-    .guestbook-text {
-      font-size: 11px;
-      line-height: 1.4;
-    }
-
-    .home-intro {
-      line-height: 1.6;
-      white-space: pre-line;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 10px;
-      }
-      .mini-home {
-        width: 100%;
-        grid-template-columns: 1fr;
-      }
-      .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-      }
-      .right-panel {
-        grid-template-rows: auto auto;
-      }
-    
-.memo-inner {
-  transform: none !important;
-}
-
-.mini-home {
-  transform: none !important;
-}
-.memo-layer {
-  transform: none !important;
-}
   </style>
 </head>
 
 <body>
-  <!-- 📄 겹쳐진 종이 1 -->
-  <div class="memo-layer">
 
-    <!-- 📄 겹쳐진 종이 2 -->
+  <div class="memo-layer">
     <div class="memo-inner">
 
-     <div class="mini-wrapper">
-      <!-- 🏠 여기에 기존 mini-home 전체 유지 -->
-      <div class="mini-home">
+      <!-- 미니홈피를 반듯하게 유지하는 wrapper -->
+      <div class="mini-wrapper">
 
-        <!-- 상단바 -->
-        <div class="top-bar">
+        <!-- mini-home 본체 시작 -->
+        <div class="mini-home">
 
-          <div class="top-title">✩성준★별빛남자✩님의 미니홈피</div>
+          <!-- 상단바 -->
+          <div class="top-bar">
+            <div class="top-title">✩성준★별빛남자✩님의 미니홈피</div>
 
-          <div class="top-bgm">
-            <audio id="bgm" src="bgm.mp3" autoplay loop></audio>
+            <div class="top-bgm">
+              <audio id="bgm" src="bgm.mp3" autoplay loop></audio>
 
-            <strong>BGM: <span>🎵 헤어지지 못하는 여자, 떠나가지 못하는 남자 🎵</span></strong>
+              <strong>BGM: <span>🎵 헤어지지 못하는 여자, 떠나가지 못하는 남자 🎵</span></strong>
 
-            <button type="button" id="play-btn" class="active">▶ 재생</button>
-            <button type="button" id="pause-btn">⏸ 정지</button>
+              <button type="button" id="play-btn" class="active">▶ 재생</button>
+              <button type="button" id="pause-btn">⏸ 정지</button>
+            </div>
           </div>
-         
-        </div>
 
-        <!-- 왼쪽 패널 -->
-        <aside class="left-panel">
-
-          <section class="profile-card">
-            <div class="profile-photo">
-              <img src="profile.jpg" alt="프로필 사진">
-            </div>
-            <div class="profile-name">✩성준★별빛남자✩</div>
-            <div class="profile-status">🌙 누구의 하늘 아래서든 나는 성준,<br>
-              오늘도 화이팅 ✨
-            </div>
-            <div class="profile-info">
-              · 나이: 20살<br />
-              · 학교: 한양대학교 ERICA<br />
-              · 한 줄 소개: <br />
-              &nbsp;&nbsp;ㄴrㄹ6 일촌ṑトㅈr :)
-            </div>
-          </section>
-
-          <nav class="menu">
-            <div class="menu-title">MENU</div>
-            <ul class="menu-list">
-              <li class="menu-item active" data-target="home">
-                <span>홈</span>
-                <small>Home</small>
-              </li>
-              <li class="menu-item" data-target="diary">
-                <span>다이어리</span>
-                <small>Diary</small>
-              </li>
-              <li class="menu-item" data-target="photo">
-                <span>사진첩</span>
-                <small>Photo</small>
-              </li>
-              <li class="menu-item" data-target="guestbook">
-                <span>방명록</span>
-                <small>Guestbook</small>
-              </li>
-            </ul>
-          </nav>
-
-        </aside>
-
-        <!-- 오른쪽 패널 -->
-        <main class="right-panel">
-
-          <section class="miniroom">
-            <div class="miniroom-label">MINIROOM</div>
-            <div class="miniroom-scene">
-              <span>여기에 미니룸 이미지<br>또는 일러스트를 넣으세요</span>
-            </div>
-            <div class="miniroom-text">
-              오늘의 미니룸 한마디 🗨<br />
-              - 날씨가 좋으면 기분도 좋아지는 타입 ☀<br />
-              - 과제와의 전쟁 중...<br />
-              - 방문해줘서 고마워요! <span style="font-size: 10px;">(♡나는 너의 팬♡)</span>
-            </div>
-          </section>
-
-          <section class="content">
-            <div class="content-header">
-              <div class="content-title">홈</div>
-              <div class="content-date" id="today-date"></div>
-            </div>
-
-            <div class="content-section active" id="home">
-              <div class="home-intro">
-                ㅇ비૮ત્રુṑト⋌ㅔ요, ✩성준★별빛남ㅈr✩의 ㅁ┃Ꮣㅣ홈ᄑㅣના ꖶ신 걸 환영합Ꮣㅣㄷr :)<br>
-                ࿁ㅕ긴 ✩성준★의 별빛๐ㅣ ㅂĿ짝๐ㅣ는 공ㄱ비✩๐ㅣના요.<br>
-                ꖶ늘도 성준★느낌 ㅇrᨈㅣ죠? ㅎㅎ<br>
-                소소ㅎŁ 일ㅅБ들, 추억 ㅎŁ 컷 ㅎŁ 컷 모ટㅏ프Г는 중✦<br>
-                丕용ṑ┃ ㅂĿ짝๐ㅣ는 성준๐ㅣ의 ⋌ㅔኀㅖના 천천ṑ┃ 빠져보⋌ㅔ요 ✧
+          <!-- 왼쪽 패널 -->
+          <aside class="left-panel">
+            <section class="profile-card">
+              <div class="profile-photo">
+                <img src="profile.jpg" alt="프로필 사진">
               </div>
-            </div>
+              <div class="profile-name">✩성준★별빛남자✩</div>
+              <div class="profile-status">🌙 누구의 하늘 아래서든 나는 성준,<br>오늘도 화이팅 ✨</div>
+              <div class="profile-info">
+                · 나이: 20살<br />
+                · 학교: 한양대학교 ERICA<br />
+                · 한 줄 소개: <br />
+                &nbsp;&nbsp;ㄴrㄹ6 일촌ṑトㅈr :)
+              </div>
+            </section>
 
-            <div class="content-section" id="diary">
-              <div class="diary-entry">
-                <div class="diary-entry-title">새로운 시작</div>
-                <div class="diary-entry-date">2025.12.04</div>
-                <div class="diary-entry-body">
-오늘 드디어 ㅁ┃Ꮣㅣ 홈ᄑㅣ를 만들었다!
-최강 윤성준 ꖶ늘도 호r๐ㅣ팅๐ㅣㄷr. :)
-앞으로 ࿁ㅕᥐㅣㄷr프Г 고ト제 ๐ㅣ࿁ㅑᥐㅣㄹ6, 일ㅅБ ᥐㅣ록도 丕금씩 남겨봐࿁ㅑスı.
+            <nav class="menu">
+              <div class="menu-title">MENU</div>
+              <ul class="menu-list">
+                <li class="menu-item active" data-target="home">
+                  <span>홈</span><small>Home</small>
+                </li>
+                <li class="menu-item" data-target="diary">
+                  <span>다이어리</span><small>Diary</small>
+                </li>
+                <li class="menu-item" data-target="photo">
+                  <span>사진첩</span><small>Photo</small>
+                </li>
+                <li class="menu-item" data-target="guestbook">
+                  <span>방명록</span><small>Guestbook</small>
+                </li>
+              </ul>
+            </nav>
+          </aside>
+
+          <!-- 오른쪽 패널 -->
+          <main class="right-panel">
+
+            <section class="miniroom">
+              <div class="miniroom-label">MINIROOM</div>
+              <div class="miniroom-scene">
+                <span>여기에 미니룸 이미지<br>또는 일러스트를 넣으세요</span>
+              </div>
+              <div class="miniroom-text">
+                오늘의 미니룸 한마디 🗨<br />
+                - 날씨가 좋으면 기분도 좋아지는 타입 ☀<br />
+                - 과제와의 전쟁 중...<br />
+                - 방문해줘서 고마워요! <span style="font-size: 10px;">(♡나는 너의 팬♡)</span>
+              </div>
+            </section>
+
+            <section class="content">
+              <div class="content-header">
+                <div class="content-title">홈</div>
+                <div class="content-date" id="today-date"></div>
+              </div>
+
+              <div class="content-section active" id="home">
+                <div class="home-intro">
+                  ㅇ비૮ત્રુṑト⋌ㅔ요, ✩성준★별빛남ㅈr✩의 ㅁ┃Ꮣㅣ홈ᄑㅣના ꖶ신 걸 환영합Ꮣㅣㄷr :)<br>
+                  ࿁ㅕ긴 ✩성준★의 별빛๐ㅣ ㅂĿ짝๐ㅣ는 공ㄱ비✩๐ㅣના요.<br>
+                  ꖶ늘도 성준★느낌 ㅇrᨈㅣ죠? ㅎㅎ<br>
+                  소소ㅎŁ 일ㅅБ들, 추억 ㅎŁ 컷 ㅎŁ 컷 모ટㅏ프Г는 중✦<br>
+                  丕용ṑ┃ ㅂĿ짝๐ㅣ는 성준๐ㅣ의 ⋌ㅔኀㅖના 천천ṑ┃ 빠져보⋌ㅔ요 ✧
                 </div>
               </div>
 
-              <div class="diary-entry">
-                <div class="diary-entry-title">시험 끝!</div>
-                <div class="diary-entry-date">2025.12.05</div>
-                <div class="diary-entry-body">
+              <div class="content-section" id="diary">
+                <div class="diary-entry">
+                  <div class="diary-entry-title">새로운 시작</div>
+                  <div class="diary-entry-date">2025.12.04</div>
+                  <div class="diary-entry-body">
+오늘 드디어 ㅁ┃Ꮣㅣ 홈ᄑㅣ를 만들었다!
+최강 윤성준 ꖶ늘도 호r๐ㅣ팅๐ㅣㄷr. :)
+앞으로 ࿁ㅕᥐㅣㄷr프Г 고ト제 ๐ㅣ࿁ㅑᥐㅣㄹ6, 일ㅅБ ᥐㅣ록도 丕금씩 남겨봐࿁ㅑスı.
+                  </div>
+                </div>
+
+                <div class="diary-entry">
+                  <div class="diary-entry-title">시험 끝!</div>
+                  <div class="diary-entry-date">2025.12.05</div>
+                  <div class="diary-entry-body">
 시험이 끝났다.  
 살았다… 😭  
 며칠 동안 제대로 못 자서 힘들었지만, 이제 조금 쉬어도 되겠지?
 친구들이랑 약속도 잡아야겠다!
+                  </div>
+                </div>
+                <button class="write-btn">작성하기</button>
+              </div>
+
+              <div class="content-section" id="photo">
+                <p style="margin-bottom: 8px;">사진 위에 마우스를 올리면 설명을 넣을 수도 있어요.</p>
+                <div class="photo-grid">
+                  <div class="photo-item" title="캠퍼스 풍경">사진 1</div>
+                  <div class="photo-item" title="카페에서 공부 중">사진 2</div>
+                  <div class="photo-item" title="친구들과 함께">사진 3</div>
+                  <div class="photo-item" title="야경">사진 4</div>
                 </div>
               </div>
-              <button class="write-btn">작성하기</button>
-            </div>
 
-            <div class="content-section" id="photo">
-              <p style="margin-bottom: 8px;">사진 위에 마우스를 올리면 설명을 넣을 수도 있어요.</p>
-              <div class="photo-grid">
-                <div class="photo-item" title="캠퍼스 풍경">사진 1</div>
-                <div class="photo-item" title="카페에서 공부 중">사진 2</div>
-                <div class="photo-item" title="친구들과 함께">사진 3</div>
-                <div class="photo-item" title="야경">사진 4</div>
-              </div>
-            </div>
+              <div class="content-section" id="guestbook">
+                <form class="guestbook-form" id="guestbook-form">
+                  <input type="text" id="guest-name" placeholder="이름 / 닉네임" required />
+                  <textarea id="guest-message" rows="3" placeholder="방명록을 남겨주세요 :)" required></textarea>
+                  <button type="submit">작성</button>
+                </form>
 
-            <div class="content-section" id="guestbook">
-              <form class="guestbook-form" id="guestbook-form">
-                <input type="text" id="guest-name" placeholder="이름 / 닉네임" required />
-                <textarea id="guest-message" rows="3" placeholder="방명록을 남겨주세요 :)" required></textarea>
-                <button type="submit">작성</button>
-              </form>
-
-              <div class="guestbook-list" id="guestbook-list">
-                <div class="guestbook-item">
-                  <div class="guestbook-meta">익명 · 2025-12-04</div>
-                  <div class="guestbook-text">
-                    와… 진짜 싸이월드 미니홈피 감성 제대로다 😂 자주 놀러올게!
+                <div class="guestbook-list" id="guestbook-list">
+                  <div class="guestbook-item">
+                    <div class="guestbook-meta">익명 · 2025-12-04</div>
+                    <div class="guestbook-text">
+                      와… 진짜 싸이월드 미니홈피 감성 제대로다 😂 자주 놀러올게!
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-          </section>
+            </section>
 
-        </main>
+          </main>
+        </div>
+        <!-- mini-home 끝 -->
+
       </div>
-      <!-- END mini-home -->
-     </div> 
-    </div>
-    <!-- END memo-inner -->
+      <!-- mini-wrapper 끝 -->
 
+    </div>
   </div>
-  <!-- END memo-layer -->
 
   <script>
     function formatToday() {
@@ -578,11 +211,9 @@
         item.classList.add("active");
 
         const target = item.getAttribute("data-target");
+
         sections.forEach((section) => {
-          section.classList.remove("active");
-          if (section.id === target) {
-            section.classList.add("active");
-          }
+          section.classList.toggle("active", section.id === target);
         });
 
         contentTitle.textContent = titleMap[target] || "홈";
@@ -620,7 +251,3 @@
 
 </body>
 </html>
-
-
-
-
